@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();</script>
+<title>Add Student · Faculty Portal</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="shortcut icon" href="https://www.adityauniversity.in/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+<div class="app-shell">
+  <div class="sidebar-overlay"></div>
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <div class="brand-mark"><img src="https://www.adityauniversity.in/favicon.ico" alt="Aditya University logo"></div>
+      <div class="brand-name">Aditya university<span>Faculty Portal</span></div>
+      <button class="sidebar-close" aria-label="Close menu">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html"><span class="ic">▤</span> Dashboard</a>
+      <a href="students.html"><span class="ic">🎓</span> Students</a>
+      <a href="add-student.html" class="active"><span class="ic">➕</span> Add Student</a>
+      <a href="marks.html"><span class="ic">✎</span> Enter Marks</a>
+      <a href="results.html"><span class="ic">📄</span> Manage Results</a>
+      <a href="search.html"><span class="ic">⌕</span> Search Student</a>
+      <a href="profile.html"><span class="ic">👤</span> Profile</a>
+      <a href="#" data-logout><span class="ic">⏻</span> Logout</a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="sidebar-user">
+        <div class="avatar" id="side-avatar">F</div>
+        <div class="who"><strong id="side-name">Faculty</strong><span id="side-dept">Department</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="app-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" aria-label="Open menu">☰</button>
+        <div class="breadcrumb"><b>Add Student</b> · New enrollment</div>
+      </div>
+      <div class="topbar-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle Theme">🌙</button>
+        <button class="icon-btn" data-tip="Notifications">🔔<span class="dot"></span></button>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <div><h1>Add Student</h1><p class="sub">Enroll a new student into the result management system.</p></div>
+      </div>
+
+      <div class="card">
+        <div class="card-pad">
+          <form id="add-student-form" novalidate>
+            <div class="form-grid">
+              <div class="field" id="field-roll"><label for="roll">Roll Number</label><input class="input" id="roll" name="roll" placeholder="e.g. 106"><p class="error-text">Required.</p></div>
+              <div class="field" id="field-name"><label for="name">Student Name</label><input class="input" id="name" name="name" placeholder="Full name"><p class="error-text">Required.</p></div>
+
+              <div class="field" id="field-email"><label for="email">Email</label><input class="input" type="email" id="email" name="email" placeholder="student@college.edu"><p class="error-text">Required.</p></div>
+              <div class="field" id="field-phone"><label for="phone">Phone</label><input class="input" id="phone" name="phone" placeholder="10-digit number"><p class="error-text">Required.</p></div>
+
+              <div class="field" id="field-dob"><label for="dob">Date of Birth</label><input class="input" type="date" id="dob" name="dob"><p class="error-text">Required.</p></div>
+              <div class="field" id="field-gender"><label for="gender">Gender</label>
+                <select class="input" id="gender" name="gender">
+                  <option value="">Select…</option>
+                  <option>Male</option><option>Female</option><option>Other</option>
+                </select><p class="error-text">Required.</p>
+              </div>
+
+              <div class="field" id="field-branch"><label for="branch">Branch</label>
+                <select class="input" id="branch" name="branch">
+                  <option value="">Select…</option>
+                  <option>CSE</option><option>ECE</option><option>IT</option><option>Mechanical</option><option>Civil</option><option>EEE</option><option>AIML</option><option>DS</option>
+                </select><p class="error-text">Required.</p>
+              </div>
+              <div class="field" id="field-year"><label for="year">Year</label>
+                <select class="input" id="year" name="year">
+                  <option value="">Select…</option>
+                  <option value="1">Year 1</option><option value="2">Year 2</option><option value="3">Year 3</option><option value="4">Year 4</option>
+                </select><p class="error-text">Required.</p>
+              </div>
+
+              <div class="field" id="field-semester"><label for="semester">Semester</label>
+                <select class="input" id="semester" name="semester">
+                  <option value="">Select…</option>
+                  <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+                </select><p class="error-text">Required.</p>
+              </div>
+              <div class="field" id="field-academicYear"><label for="academicYear">Academic Year</label>
+                <select class="input" id="academicYear" name="academicYear">
+                  <option value="">Select…</option>
+                  <option>2024-25</option><option>2025-26</option><option>2026-27</option>
+                </select><p class="error-text">Required.</p>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <a href="students.html" class="btn btn-outline">Cancel</a>
+              <button type="submit" class="btn btn-primary">Save Student</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="logout-modal">
+  <div class="modal">
+    <div class="modal-head"><h3>Log out?</h3></div>
+    <div class="modal-body">You'll need your faculty ID and password to sign back in.</div>
+    <div class="modal-foot">
+      <button class="btn btn-outline btn-sm" onclick="closeModal('logout-modal')">Cancel</button>
+      <button class="btn btn-danger btn-sm" onclick="logout()">Log out</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/faculty.js"></script>
+<script>
+  (async () => { const faculty = await requireFaculty(); if (faculty) populateFacultySidebar(faculty); })();
+  document.getElementById("add-student-form").addEventListener("submit", handleAddStudent);
+</script>
+</body>
+</html>
+

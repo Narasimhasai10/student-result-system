@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();</script>
+<title>Profile · Faculty Portal</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="shortcut icon" href="https://www.adityauniversity.in/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+<div class="app-shell">
+  <div class="sidebar-overlay"></div>
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <div class="brand-mark"><img src="https://www.adityauniversity.in/favicon.ico" alt="Aditya University logo"></div>
+      <div class="brand-name">Aditya university<span>Faculty Portal</span></div>
+      <button class="sidebar-close" aria-label="Close menu">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html"><span class="ic">▤</span> Dashboard</a>
+      <a href="students.html"><span class="ic">🎓</span> Students</a>
+      <a href="add-student.html"><span class="ic">➕</span> Add Student</a>
+      <a href="marks.html"><span class="ic">✎</span> Enter Marks</a>
+      <a href="results.html"><span class="ic">📄</span> Manage Results</a>
+      <a href="search.html"><span class="ic">⌕</span> Search Student</a>
+      <a href="profile.html" class="active"><span class="ic">👤</span> Profile</a>
+      <a href="#" data-logout><span class="ic">⏻</span> Logout</a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="sidebar-user">
+        <div class="avatar" id="side-avatar">F</div>
+        <div class="who"><strong id="side-name">Faculty</strong><span id="side-dept">Department</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="app-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" aria-label="Open menu">☰</button>
+        <div class="breadcrumb"><b>Profile</b> · Your account</div>
+      </div>
+      <div class="topbar-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle Theme">🌙</button>
+        <button class="icon-btn" data-tip="Notifications">🔔<span class="dot"></span></button>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <div><h1>Profile</h1><p class="sub">Your faculty account details.</p></div>
+      </div>
+
+      <div class="card">
+        <div class="card-pad" style="display:flex; align-items:center; gap:18px; border-bottom:1px solid var(--line);">
+          <div id="p-avatar" style="width:64px; height:64px; border-radius:50%; background:var(--gold-500); color:var(--accent-text); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:24px; font-weight:700;">F</div>
+          <div>
+            <h3 id="p-name" style="font-size:19px;">Faculty</h3>
+            <p class="text-muted" id="p-designation" style="margin-top:4px; font-size:13.5px;">—</p>
+          </div>
+        </div>
+        <div class="card-pad" style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px 20px;" id="p-grid"></div>
+        <div class="card-pad"><button class="btn btn-outline" onclick="changeFacultyPassword()">Change Password</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="logout-modal">
+  <div class="modal">
+    <div class="modal-head"><h3>Log out?</h3></div>
+    <div class="modal-body">You'll need your faculty ID and password to sign back in.</div>
+    <div class="modal-foot">
+      <button class="btn btn-outline btn-sm" onclick="closeModal('logout-modal')">Cancel</button>
+      <button class="btn btn-danger btn-sm" onclick="logout()">Log out</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/faculty.js"></script>
+<script>
+  (async () => { const faculty = await requireFaculty(); if (faculty){
+    populateFacultySidebar(faculty);
+    document.getElementById("p-avatar").textContent = faculty.name.split(" ").map(w=>w[0]).slice(0,2).join("");
+    document.getElementById("p-name").textContent = faculty.name;
+    document.getElementById("p-designation").textContent = `${faculty.designation} · ${faculty.dept}`;
+    const fields = [["Faculty ID", faculty.id], ["Email", faculty.email], ["Department", faculty.dept], ["Designation", faculty.designation]];
+    document.getElementById("p-grid").innerHTML = fields.map(([label,val]) => `
+      <div>
+        <span style="display:block; font-size:11.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; font-weight:600; margin-bottom:6px;">${label}</span>
+        <span style="font-size:15px; color:var(--navy-900); font-weight:600;">${val}</span>
+      </div>
+    `).join("");
+  } })();
+</script>
+<style>
+  @media (max-width:780px){ #p-grid{ grid-template-columns:1fr 1fr !important; } }
+  @media (max-width:520px){ #p-grid{ grid-template-columns:1fr !important; } }
+</style>
+</body>
+</html>
+

@@ -1,0 +1,60 @@
+# Ignore build artifacts
+build/
+bin/
+Debug/
+Release/
+*.exe
+*.dll
+*.lib
+*.a
+*.o
+*.so
+*.dylib
+
+# Ignore IDE files
+.vscode/
+.vs/
+*.vcxproj
+*.vcxproj.filters
+.sln
+*.user
+
+# Ignore database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Ignore OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Ignore Node modules (if using npm)
+node_modules/
+package-lock.json
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Ignore temp files
+*.tmp
+*.temp
+*.log
+*.swp
+*.swo
+*~
+
+# Ignore CMake cache
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Keep important files
+!build/.gitkeep

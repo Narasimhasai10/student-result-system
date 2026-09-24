@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();</script>
+<title>Enter Marks · Faculty Portal</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="shortcut icon" href="https://www.adityauniversity.in/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+<div class="app-shell">
+  <div class="sidebar-overlay"></div>
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <div class="brand-mark"><img src="https://www.adityauniversity.in/favicon.ico" alt="Aditya University logo"></div>
+      <div class="brand-name">Aditya university<span>Faculty Portal</span></div>
+      <button class="sidebar-close" aria-label="Close menu">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html"><span class="ic">▤</span> Dashboard</a>
+      <a href="students.html"><span class="ic">🎓</span> Students</a>
+      <a href="add-student.html"><span class="ic">➕</span> Add Student</a>
+      <a href="marks.html" class="active"><span class="ic">✎</span> Enter Marks</a>
+      <a href="results.html"><span class="ic">📄</span> Manage Results</a>
+      <a href="search.html"><span class="ic">⌕</span> Search Student</a>
+      <a href="profile.html"><span class="ic">👤</span> Profile</a>
+      <a href="#" data-logout><span class="ic">⏻</span> Logout</a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="sidebar-user">
+        <div class="avatar" id="side-avatar">F</div>
+        <div class="who"><strong id="side-name">Faculty</strong><span id="side-dept">Department</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="app-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" aria-label="Open menu">☰</button>
+        <div class="breadcrumb"><b>Enter Marks</b> · Record subject scores</div>
+      </div>
+      <div class="topbar-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle Theme">🌙</button>
+        <button class="icon-btn" data-tip="Notifications">🔔<span class="dot"></span></button>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <div><h1>Enter Marks</h1><p class="sub">Select a student to record internal and external marks.</p><span class="text-muted" id="marks-semester-context" style="font-size:13px;">Choose a semester link to open marks.</span></div>
+      </div>
+
+      <div class="card" style="margin-bottom:20px;">
+        <div class="card-pad">
+          <div class="form-grid">
+            <div class="field" style="margin-bottom:0;">
+              <label for="student-select">Student</label>
+              <select class="input" id="student-select"></select>
+            </div>
+            <div class="field" style="margin-bottom:0;">
+              <label for="marks-ay-select">Academic Year</label>
+              <select class="input" id="marks-ay-select">
+                <option>2024-25</option>
+                <option>2025-26</option>
+                <option>2026-27</option>
+              </select>
+            </div>
+            <div class="field" style="margin-bottom:0;">
+              <label for="marks-exam-select">Exam</label>
+              <select class="input" id="marks-exam-select">
+                <option value="ie1">IE-1</option><option value="ie2">IE-2</option><option value="grade_points">Grade Points (Final Result)</option><option value="credits">Credits</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-state" id="marks-empty">
+        <div class="glyph">✎</div>
+        <h4>No student selected</h4>
+        <p>Choose a student above to view and enter their subject-wise marks.</p>
+      </div>
+
+      <div class="card" id="marks-form-wrap" style="display:none;">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Subject</th><th>Credits</th><th>IE-1</th><th>IE-2</th><th>Grade Points</th></tr>
+            </thead>
+            <tbody id="enter-marks-tbody"></tbody>
+          </table>
+        </div>
+        <div class="form-actions" style="padding:18px 22px;">
+          <button class="btn btn-primary" onclick="saveMarks()">Save Marks</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="logout-modal">
+  <div class="modal">
+    <div class="modal-head"><h3>Log out?</h3></div>
+    <div class="modal-body">You'll need your faculty ID and password to sign back in.</div>
+    <div class="modal-foot">
+      <button class="btn btn-outline btn-sm" onclick="closeModal('logout-modal')">Cancel</button>
+      <button class="btn btn-danger btn-sm" onclick="logout()">Log out</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/faculty.js"></script>
+<script>
+  (async () => { const faculty = await requireFaculty(); if (faculty){ populateFacultySidebar(faculty); await initEnterMarksPage(); } })();
+</script>
+</body>
+</html>
+

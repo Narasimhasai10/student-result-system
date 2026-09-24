@@ -1,0 +1,300 @@
+{
+  "info": {
+    "name": "Student Result System API",
+    "description": "Complete API collection for Aditya University Student Result Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["api", "health"]
+        }
+      }
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Student Login",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roll\": \"101\",\n  \"password\": \"student123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/login/student",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "auth", "login", "student"]
+            }
+          }
+        },
+        {
+          "name": "Faculty Login",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"FAC001\",\n  \"password\": \"faculty123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/login/faculty",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "auth", "login", "faculty"]
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/auth/logout",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Students",
+      "item": [
+        {
+          "name": "Get All Students",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "students"]
+            }
+          }
+        },
+        {
+          "name": "Get Student by Roll",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/students/101",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "students", "101"]
+            }
+          }
+        },
+        {
+          "name": "Create Student",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roll\": \"108\",\n  \"password\": \"student123\",\n  \"name\": \"New Student\",\n  \"email\": \"student@college.edu\",\n  \"phone\": \"9876543210\",\n  \"gender\": \"Male\",\n  \"branch\": \"CSE\",\n  \"year\": 1,\n  \"semester\": 2,\n  \"academicYear\": \"2024-25\",\n  \"dob\": \"2005-01-15\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/students",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "students"]
+            }
+          }
+        },
+        {
+          "name": "Update Student",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Updated Name\",\n  \"email\": \"updated@college.edu\",\n  \"phone\": \"9876543211\",\n  \"gender\": \"Female\",\n  \"branch\": \"IT\",\n  \"year\": 2,\n  \"semester\": 3,\n  \"academicYear\": \"2024-25\",\n  \"dob\": \"2005-01-15\",\n  \"resultStatus\": \"Published\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/students/101",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "students", "101"]
+            }
+          }
+        },
+        {
+          "name": "Delete Student",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/students/108",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "students", "108"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Marks",
+      "item": [
+        {
+          "name": "Get Marks",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/marks/101",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "marks", "101"]
+            }
+          }
+        },
+        {
+          "name": "Add Marks",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"C++\": {\"internal\": 25, \"external\": 60},\n  \"DBMS\": {\"internal\": 24, \"external\": 58},\n  \"Mathematics\": {\"internal\": 26, \"external\": 62},\n  \"Physics\": {\"internal\": 23, \"external\": 55},\n  \"English\": {\"internal\": 22, \"external\": 50}\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/marks/101",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "marks", "101"]
+            }
+          }
+        },
+        {
+          "name": "Update Marks",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"C++\": {\"internal\": 28, \"external\": 68},\n  \"DBMS\": {\"internal\": 27, \"external\": 65}\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/marks/101",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "marks", "101"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Results",
+      "item": [
+        {
+          "name": "Get All Results",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/results",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "results"]
+            }
+          }
+        },
+        {
+          "name": "Get Student Result",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/results/101",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "results", "101"]
+            }
+          }
+        },
+        {
+          "name": "Publish Result",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"totalMarks\": 285,\n  \"percentage\": 85.5,\n  \"grade\": \"A\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/results/101",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "results", "101"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Faculty",
+      "item": [
+        {
+          "name": "Get All Faculty",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/faculty",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "faculty"]
+            }
+          }
+        },
+        {
+          "name": "Get Faculty by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/faculty/FAC001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "faculty", "FAC001"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

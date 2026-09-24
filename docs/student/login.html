@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();</script>
+<title>Student Login · Aditya University</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="shortcut icon" href="https://www.adityauniversity.in/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+<div class="auth-wrap">
+  <div class="auth-top">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle Theme">🌙</button>
+  </div>
+  <div class="auth-side">
+    <div class="brand">
+      <div class="brand-mark"><img src="https://www.adityauniversity.in/favicon.ico" alt="Aditya University logo"></div>
+      <div class="brand-name">Aditya university<span>Student Portal</span></div>
+    </div>
+    <div class="auth-quote">
+      <h2>"Every mark you've earned, in one place."</h2>
+      <p>Sign in to view your subject-wise marks, semester results and download your official marksheet.</p>
+    </div>
+    <p class="fine">SRMS · STUDENT ACCESS</p>
+  </div>
+
+  <div class="auth-main">
+    <div class="auth-card">
+      <a href="../index.html" class="back-link">← Back to home</a>
+      <h1>Student Login</h1>
+      <p class="sub">Enter your roll number and password to continue.</p>
+
+      <form id="student-login-form" novalidate>
+        <div class="field" id="field-roll">
+          <label for="roll">Roll Number</label>
+          <input class="input" type="text" id="roll" name="roll" placeholder="e.g. 101" autocomplete="username">
+          <p class="error-text">Roll number is required.</p>
+        </div>
+
+        <div class="field" id="field-password">
+          <label for="password">Password</label>
+          <div class="password-wrap">
+            <input class="input" type="password" id="password" name="password" placeholder="Enter your password" autocomplete="current-password">
+            <button type="button" class="toggle-pw">Show</button>
+          </div>
+          <p class="error-text">Password is required.</p>
+        </div>
+
+        <div class="row-between">
+          <label class="checkbox-line"><input type="checkbox" id="remember"> Remember me</label>
+          <a href="#" class="link-accent" onclick="showToast('info','Reset link sent','Check with your registrar if you don\'t receive it.'); return false;">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="login-btn">Login</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+  document.getElementById("student-login-form").addEventListener("submit", handleStudentLogin);
+</script>
+</body>
+</html>
+

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>(function(){var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);})();</script>
+<title>My Result · Student Portal</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="shortcut icon" href="https://www.adityauniversity.in/favicon.ico" type="image/x-icon">
+</head>
+<body>
+
+<div class="app-shell">
+  <div class="sidebar-overlay"></div>
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <div class="brand-mark"><img src="https://www.adityauniversity.in/favicon.ico" alt="Aditya University logo"></div>
+      <div class="brand-name">Aditya University<span>Student Portal</span></div>
+      <button class="sidebar-close" aria-label="Close menu">✕</button>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="dashboard.html"><span class="ic">▤</span> Dashboard</a>
+      <a href="profile.html"><span class="ic">👤</span> My Profile</a>
+      <a href="marks.html"><span class="ic">✎</span> My Marks</a>
+      <a href="result.html" class="active"><span class="ic">📄</span> My Result</a>
+      <a href="#" data-logout><span class="ic">⏻</span> Logout</a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="sidebar-user">
+        <div class="avatar" id="side-avatar">S</div>
+        <div class="who"><strong id="side-name">Student</strong><span id="side-roll">Roll —</span></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="app-main">
+    <div class="topbar">
+      <div class="topbar-left">
+        <button class="hamburger" aria-label="Open menu">☰</button>
+        <div class="breadcrumb"><b>My Result</b> · Official marksheet</div>
+      </div>
+      <div class="topbar-right">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle Theme">🌙</button>
+        <button class="icon-btn" data-tip="Notifications">🔔<span class="dot"></span></button>
+      </div>
+    </div>
+
+    <div class="page">
+      <div class="page-head">
+        <div><h1>My Result</h1><p class="sub">Semester marksheet — view, print or download.</p></div>
+        <select class="input select-sm" id="result-semester-select" aria-label="Result semester"></select>
+      </div>
+
+      <div class="marksheet">
+        <div class="marksheet-head">
+          <div class="logo">
+            <div class="crest">
+              <img src="https://www.adityauniversity.in/favicon.ico"
+                  alt="Aditya University Logo">
+            </div>
+            <div class="logo-text">
+              <h2>ADITYA</h2> 
+              <h2>UNIVERSITY</h2>
+            </div>
+          </div>
+          <p class="addr">Aditya Nagar, ADB Road, Surampalem, Kakinada District, Andhra Pradesh</p>
+          <span class="doc-title">Semester Marksheet</span>
+        </div>
+
+
+
+        <div class="marksheet-meta">
+          <div><span>Student Name</span><b id="r-name">—</b></div>
+          <div><span>Roll Number</span><b id="r-roll">—</b></div>
+          <div><span>Branch</span><b id="r-branch">—</b></div>
+          <div><span>Semester</span><b id="r-semester">—</b></div>
+          <div><span>Academic Year</span><b id="r-year">—</b></div>
+          <div><span>Student ID</span><b id="r-id">—</b></div>
+        </div>
+
+        <div class="marksheet-body">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Subject</th><th>Credits</th><th>IE-1</th><th>IE-2</th><th>Grade Points</th><th>Status</th></tr>
+              </thead>
+              <tbody id="result-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="marksheet-summary">
+          <div class="summary-pill"><span>Percentage</span><b id="summary-percent">—</b></div>
+          <div class="summary-pill"><span>SGPA</span><b id="summary-sgpa">—</b></div>
+          <div class="summary-pill"><span>Status</span><b id="summary-result-status">—</b></div>
+        </div>
+
+        <div class="result-status-band" id="status-band">Result: —</div>
+
+        <div class="marksheet-actions">
+          <button class="btn btn-outline" onclick="printResult()">🖨 Print Result</button>
+          <button class="btn btn-primary" onclick="downloadResult()">⬇ Download Result</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="logout-modal">
+  <div class="modal">
+    <div class="modal-head"><h3>Log out?</h3></div>
+    <div class="modal-body">You'll need your roll number and password to sign back in.</div>
+    <div class="modal-foot">
+      <button class="btn btn-outline btn-sm" onclick="closeModal('logout-modal')">Cancel</button>
+      <button class="btn btn-danger btn-sm" onclick="logout()">Log out</button>
+    </div>
+  </div>
+</div>
+
+<script src="../js/data.js"></script>
+<script src="../js/ui.js"></script>
+<script src="../js/theme.js"></script>
+<script src="../js/auth.js"></script>
+<script src="../js/student.js"></script>
+<script>
+  (async () => {
+    const student = await requireStudent();
+    if (!student) return;
+    const session = Session.get();
+    const semesters = await apiRequest(`/marks/${encodeURIComponent(session.roll)}/semesters`);
+    const select = document.getElementById("result-semester-select");
+    select.innerHTML = semesters.map(semester => `<option value="${semester}">Semester ${semester}</option>`).join("");
+    select.value = String(student.semester);
+    renderStudentResult(student);
+    select.addEventListener("change", async event => renderStudentResult(await loadStudent(session.roll, event.target.value)));
+  })();
+</script>
+<style>
+  @media print{
+    .sidebar, .topbar, .marksheet-actions, .toast-stack{ display:none !important; }
+    .app-main{ margin-left:0 !important; }
+    .page{ padding:0 !important; }
+    body{ background:var(--surface); }
+  }
+</style>
+</body>
+</html>
+

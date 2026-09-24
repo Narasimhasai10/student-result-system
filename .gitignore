@@ -1,0 +1,9 @@
+backend/build*/
+backend/*/_deps/
+__pycache__/
+*.exe
+*.a
+*.log
+backend/err.txt
+backend/out.txt
+node_modules/
